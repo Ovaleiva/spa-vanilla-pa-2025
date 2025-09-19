@@ -1,27 +1,19 @@
-import getData from '../utils/getData';
+import getData from '../utils/getData';   // 👈 este import es el que faltaba
 
 const Home = async () => {
-  const data = await getData();
-  console.log(data);
-
-  const characters = data?.results || [];
-  
-  const view = `
-  <div class="Characters">
-    ${
-      characters.map(character => `
-        <article class="Characters-card">
-          <a href="#/${character.id}">
-            <img src="${character.image}" alt="${character.name}">
-            <h2>${character.name}</h2>
+  const launches = await getData();   // devuelve array completo de lanzamientos
+  return `
+    <div class="Launches">
+      ${launches.slice(0, 20).map(l => `
+        <article class="Launch-card">
+          <a href="#/${l.id}">
+            <img src="${l.links.patch.small || ''}" alt="${l.name}">
+            <h2>${l.name}</h2>
           </a>
         </article>
-      `).join('')
-    }
-  </div>
+      `).join('')}
+    </div>
   `;
-  
-  return view;
 };
 
 export default Home;

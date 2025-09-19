@@ -1,119 +1,59 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&display=swap');
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
-  color: #3c484e;
+  background-color: #0d0d0d; /* fondo negro */
+  color: #e0e0e0; /* texto claro */
   font-family: 'Open Sans', sans-serif;
 }
 
+/* HEADER */
 .Header-main {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 15px 30px;
+  background: #111; /* header oscuro */
+  color: #fff;
+  border-bottom: 1px solid #222;
 }
 
 .Header a {
   text-decoration: none;
-  color: #15302C;
+  color: #e0e0e0;
+  font-weight: 600;
+  margin: 0 10px;
+  transition: color 0.3s;
 }
 
+.Header a:hover {
+  color: #1abc9c; /* acento minimalista */
+}
+
+/* MAIN CONTENT */
 .Main {
-  padding: 10px;
-  grid-template-columns: minmax(auto, 976px);
+  padding: 20px;
   display: grid;
+  grid-template-columns: minmax(auto, 1100px);
   justify-content: center;
-}
-
-.Characters {
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1.5rem;
-  grid-row-gap: 1.5em;
-  display: grid;
-}
-
-.Characters-inner {
-  grid-template-columns: 1fr 2fr;
-  grid-gap: 1.5rem;
-  grid-row-gap: 1.5em;
-  display: grid;
-}
-
-.Characters-card {
-  text-decoration: none;
-  box-shadow: 8px 14px 38px rgba(39,44,49,.06), 1px 3px 8px rgba(39,44,49,.03);
-  border-radius: 5px;
-  margin: 0 0 20px 0;
-  display: block;
-  animation-duration: 2s;
-  animation-name: fade;
-}
-
-.Characters-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 5px 5px 0 0;
-}
-
-.Characters-card h2 {
-  font-size: 18px;
-  font-weight: 400;
-  text-align: center;
-}
-
-.Characters-card h3 {
-  font-size: 18px;
-  font-weight: 400;
-  text-align: left;
-  margin: 20px;
-}
-
-.Characters-item {
-  text-decoration: none;
-  box-shadow: 8px 14px 38px rgba(39,44,49,.06), 1px 3px 8px rgba(39,44,49,.03);
-  border-radius: 5px;
-  margin: 0 0 20px 0;
-  display: block;
-  animation-duration: 2s;
-  animation-name: fade;
-}
-
-.Characters-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 5px 5px 0 0;
-}
-
-.Characters-item h2 {
-  font-size: 18px;
-  font-weight: 300;
-  padding: 5px 10px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.Characters-item a {
-  text-decoration: none;
-  color: #026C86;
+  animation: fade 0.8s ease-in-out;
 }
 
 @keyframes fade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
+/* LOADING SPINNER */
 .Main-loading {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #3498db;
+  border: 4px solid #222;
+  border-top: 4px solid #1abc9c;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  animation: spin 2s linear infinite;
+  width: 40px;
+  height: 40px;
+  margin: 50px auto;
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
@@ -121,24 +61,61 @@ body {
   100% { transform: rotate(360deg); }
 }
 
-/* Character detail page styles */
-.Characters-inner .Characters-card h3 {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  margin: 5px 0;
-  border-bottom: 1px solid #eee;
+/* LAUNCHES GRID */
+.Launches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 25px;
+  padding: 20px;
 }
 
-.Characters-inner .Characters-card h3 span {
-  font-weight: 300;
-  color: #666;
-}
-
-.Error {
+/* LAUNCH CARD */
+.Launch-card {
+  border-radius: 12px;
+  padding: 15px;
   text-align: center;
-  padding: 40px;
-  color: #e74c3c;
-  font-size: 18px;
+  background: #1a1a1a; /* tarjeta oscuro */
+  box-shadow: 0 3px 8px rgba(0,0,0,0.5);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.Launch-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+}
+
+.Launch-card img {
+  max-width: 100%;
+  height: 160px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.Launch-card h3 {
+  font-size: 1.1rem;
+  color: #e0e0e0;
+  margin: 8px 0;
+}
+
+.Launch-card p {
+  font-size: 0.9rem;
+  color: #b0b0b0;
+  margin: 5px 0;
+}
+
+/* BUTTON / LINK */
+.Launch-card a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 15px;
+  background: #1abc9c;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.Launch-card a:hover {
+  background: #16a085;
 }

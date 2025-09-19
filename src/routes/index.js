@@ -1,35 +1,36 @@
+// Importamos los templates y páginas
 import Header from '../templates/Header';
 import Home from '../pages/Home';
-import Character from '../pages/Character';
+import Launch from '../pages/Launch';
 import Error404 from '../pages/Error404';
 
+// Importamos utilidades para manejar rutas
+import getHash from '../utils/getHash';
+import resolveRoutes from '../utils/resolveRoutes';
 
+// Definimos el mapa de rutas de la SPA
 const routes = {
-    '/': Home,
-    '/:id': Character,
+  '/': Home,       // Página principal → lista lanzamientos
+  '/:id': Launch,  // Página de detalle → un lanzamiento específico
+};
 
-}
-
+// Función principal del router
 const router = async () => {
-    const header = document.getElementById('header');
-    const content = document.getElementById('content');
+  const header = document.getElementById('header');
+  const content = document.getElementById('content');
 
-    header.innerHTML = await Header();
+  // Renderizamos el header siempre
+  header.innerHTML = await Header();
 
-    const hash = location.hash.slice(1).toLowerCase() || '/';
-    
-    // Handle dynamic routes
-    let render;
-    if (hash === '/') {
-        render = routes['/'];
-    } else if (hash.match(/^\/\d+$/)) {
-        // If hash matches pattern /{number}, use Character route
-        render = routes['/:id'];
-    } else {
-        render = Error404;
-    }
-    
-    content.innerHTML = await render();
-}
+  // Obtenemos la ruta actual según el hash de la URL
+  const hash = getHash();             // ej: "1" o "/"
+  const route = resolveRoutes(hash);  // "/" o "/:id"
+
+  // Determinamos qué vista renderizar
+  const render = routes[route] || Error404;
+
+  // Renderizamos el contenido dinámico
+  content.innerHTML = await render();
+};
 
 export default router;

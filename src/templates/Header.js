@@ -6,7 +6,7 @@ const Header = () => {
            <div class="Header-logo">
                <h1>
                     <a href="/">
-                        <span>100tifico.co</span>
+                        <span>Space X API</span>
                     </a>
                </h1>
            </div>
